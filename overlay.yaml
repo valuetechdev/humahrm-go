@@ -7,112 +7,66 @@ actions:
   - target: "$.openapi"
     update: "3.0.3"
 
-  - target: "$.paths['/users/{userId}/identifications/{id}'].put"
+  - target: "$.paths['/users/{userId}/positions']"
     description: Alter operationId
     update:
-      operationId: "updateUserIdentification"
-  - target: "$.paths['/users/{userId}/identifications/{id}'].delete"
-    description: Alter operationId
-    update:
-      operationId: "removeUserIdentification"
-  - target: "$.paths['/users/{userId}/identifications'].post"
-    description: Alter operationId
-    update:
-      operationId: "addUserIdentification"
+      get:
+        operationId: "listUserPositions"
+      post:
+        operationId: "createUserPositions"
 
-  - target: "$.paths['/users/{userId}/emergency/{id}'].put"
+  - target: "$.paths['/users']"
     description: Alter operationId
     update:
-      operationId: "updateUserEmergencyContact"
-  - target: "$.paths['/users/{userId}/emergency/{id}'].delete"
-    description: Alter operationId
-    update:
-      operationId: "removeUserEmergencyContact"
-  - target: "$.paths['/users/{userId}/emergency'].post"
-    description: Alter operationId
-    update:
-      operationId: "addUserEmergencyContact"
+      get:
+        operationId: "listUsers"
+      post:
+        operationId: "createUser"
 
-  - target: "$.paths['/users/{userId}/children/{id}'].put"
+  - target: "$.paths['/users/{id}/groups']"
     description: Alter operationId
     update:
-      operationId: "updateUserChild"
-  - target: "$.paths['/users/{userId}/children/{id}'].delete"
-    description: Alter operationId
-    update:
-      operationId: "removeUserChild"
-  - target: "$.paths['/users/{userId}/children'].post"
-    description: Alter operationId
-    update:
-      operationId: "addUserChild"
+      post:
+        operationId: "addUserToGroups"
+      delete:
+        operationId: "removeUserFromGroups"
 
-  - target: "$.paths['/users'].get"
+  - target: "$.paths['/job-titles']"
     description: Alter operationId
     update:
-      operationId: "listUsers"
-  - target: "$.paths['/users'].post"
-    description: Alter operationId
-    update:
-      operationId: "createUser"
+      get:
+        operationId: "listJobTitles"
+      post:
+        operationId: "addJobTitle"
 
-  - target: "$.paths['/users/{id}/subordinates'].get"
+  - target: "$.paths['/job-titles/{id}']"
     description: Alter operationId
     update:
-      operationId: "listUserSubordinates"
-  - target: "$.paths['/users/{id}/subordinates'].post"
-    description: Alter operationId
-    update:
-      operationId: "addUserSubordinates"
+      get:
+        operationId: "getJobTitle"
+      patch:
+        operationId: "updateJobTitle"
 
-  - target: "$.paths['/users/{id}/groups'].post"
+  - target: "$.paths['/groups']"
     description: Alter operationId
     update:
-      operationId: "addUserToGroups"
-  - target: "$.paths['/users/{id}/groups'].delete"
-    description: Alter operationId
-    update:
-      operationId: "removeUserFromGroups"
+      get:
+        operationId: "listGroups"
+      post:
+        operationId: "addGroup"
 
-  - target: "$.paths['/job-titles'].get"
+  - target: "$.paths['/groups/{id}']"
     description: Alter operationId
     update:
-      operationId: "listJobTitles"
+      get:
+        operationId: "getGroup"
+      patch:
+        operationId: "updateGroup"
 
-  - target: "$.paths['/groups'].get"
+  - target: "$.paths['/users/{id}']"
     description: Alter operationId
     update:
-      operationId: "listGroups"
-
-  - target: "$.paths['/users/{id}'].get"
-    description: Alter operationId
-    update:
-      operationId: "getUser"
-  - target: "$.paths['/users/{id}'].patch"
-    description: Alter operationId
-    update:
-      operationId: "updateUser"
-
-  - target: "$.paths['/users/{id}/work-schedule'].get"
-    description: Alter operationId
-    update:
-      operationId: "getUserWorkSchedule"
-
-  - target: "$.paths['/users/{id}/supervisor'].get"
-    description: Alter operationId
-    update:
-      operationId: "getUserSupervisor"
-
-  - target: "$.paths['/users/{id}/permissions'].get"
-    description: Alter operationId
-    update:
-      operationId: "listUserPermissions"
-
-  - target: "$.paths['/users/jubilees'].get"
-    description: Alter operationId
-    update:
-      operationId: "listJubilees"
-
-  - target: "$.paths['/holidays/{countryCode}'].get"
-    description: Alter operationId
-    update:
-      operationId: "listPublicHolidays"
+      get:
+        operationId: "getUser"
+      patch:
+        operationId: "updateUser"

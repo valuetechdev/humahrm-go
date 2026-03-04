@@ -3,8 +3,8 @@ module github.com/valuetechdev/huma-go
 go 1.25.5
 
 require (
-	github.com/oapi-codegen/runtime v1.1.2
-	github.com/stretchr/testify v1.8.4
+	github.com/oapi-codegen/runtime v1.2.0
+	github.com/stretchr/testify v1.9.0
 	golang.org/x/oauth2 v0.34.0
 )
 

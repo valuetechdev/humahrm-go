@@ -2,7 +2,7 @@
 
 # huma-go
 
-Go API client for [Huma]. It's generated with [oapi-codegen]
+Go API client for [Huma HRM]. It's generated with [oapi-codegen]
 
 ## Prerequisites
 
@@ -42,6 +42,6 @@ func yourFunc() error {
 - We alter a lot of the `operationId` in the original spec for readability in
   `overlay.yaml`
 
-[huma]: https://humahr.com/
+[Huma HRM]: https://humahr.com/
 [huma api]: https://demo.openapi.humahr.com/swagger-ui/index.html
 [oapi-codegen]: https://github.com/oapi-codegen/oapi-codegen

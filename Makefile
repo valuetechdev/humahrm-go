@@ -6,7 +6,7 @@ generate:
 .PHONY: api
 api:
 	@echo "openapi: getting latest Huma REST API"
-	@curl https://demo.openapi.humahr.com/v3/api-docs | jq . | yq -Poy > ./api/openapi.yaml
+	@curl https://openapi.humahr.com/v3/api-docs | jq . | yq -Poy > ./api/openapi.yaml
 
 .PHONY: check
 check:

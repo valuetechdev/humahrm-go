@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
   title: Huma API
-  version: 1.53.0-SNAPSHOT
+  version: 1.53.2
 servers:
-  - url: https://demo.openapi.humahr.com
+  - url: https://openapi.humahr.com
     description: Generated server url
 tags:
   - name: Position
@@ -2118,26 +2118,26 @@ components:
         contentLength:
           type: integer
           format: int64
+        contentType:
+          $ref: '#/components/schemas/Header'
+        contentEncoding:
+          $ref: '#/components/schemas/Header'
         streaming:
           type: boolean
         repeatable:
           type: boolean
         chunked:
           type: boolean
-        contentType:
-          $ref: '#/components/schemas/Header'
-        contentEncoding:
-          $ref: '#/components/schemas/Header'
     HttpParams: {}
     HttpResponse:
       type: object
       properties:
+        entity:
+          $ref: '#/components/schemas/HttpEntity'
         statusCode:
           type: integer
           format: int32
           writeOnly: true
-        entity:
-          $ref: '#/components/schemas/HttpEntity'
         locale:
           type: string
         statusLine:
@@ -2153,15 +2153,15 @@ components:
         params:
           $ref: '#/components/schemas/HttpParams'
           deprecated: true
+        header:
+          $ref: '#/components/schemas/Header'
+          writeOnly: true
         protocolVersion:
           $ref: '#/components/schemas/ProtocolVersion'
         allHeaders:
           type: array
           items:
             $ref: '#/components/schemas/Header'
-        header:
-          $ref: '#/components/schemas/Header'
-          writeOnly: true
     NameValuePair:
       type: object
       properties:

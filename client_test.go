@@ -1,4 +1,4 @@
-package huma
+package humahrm
 
 import (
 	"context"

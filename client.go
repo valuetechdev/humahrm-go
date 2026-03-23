@@ -1,6 +1,6 @@
 //go:generate go tool -modfile=./go.tool.mod github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen -config cfg.yaml ./api/openapi.yaml
 
-// Package huma provides a Go client for the Huma HR API.
+// Package humahrm provides a Go client for the Huma HR API.
 //
 // The client handles OAuth2 authentication using client credentials and
 // provides type-safe access to the Huma HR API endpoints.
@@ -28,7 +28,7 @@
 //	client, err := huma.New(creds, huma.WithHttpClient(&http.Client{
 //		Timeout: 30 * time.Second,
 //	}))
-package huma
+package humahrm
 
 import (
 	"context"

@@ -1,4 +1,4 @@
-package huma_test
+package humahrm_test
 
 import (
 	"context"
@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"time"
 
-	huma "github.com/valuetechdev/huma-go"
+	humahrm "github.com/valuetechdev/humahrm-go"
 )
 
 func Example() {
-	client, err := huma.New(&huma.ClientCredentials{
+	client, err := humahrm.New(&humahrm.ClientCredentials{
 		ClientId:     "your-client-id",
 		ClientSecret: "your-client-secret",
 	})
@@ -18,7 +18,7 @@ func Example() {
 		panic(err)
 	}
 
-	res, err := client.ListUsersWithResponse(context.Background(), &huma.ListUsersParams{})
+	res, err := client.ListUsersWithResponse(context.Background(), &humahrm.ListUsersParams{})
 	if err != nil {
 		panic(err)
 	}
@@ -27,12 +27,12 @@ func Example() {
 }
 
 func Example_withCustomHTTPClient() {
-	client, err := huma.New(
-		&huma.ClientCredentials{
+	client, err := humahrm.New(
+		&humahrm.ClientCredentials{
 			ClientId:     "your-client-id",
 			ClientSecret: "your-client-secret",
 		},
-		huma.WithHttpClient(&http.Client{
+		humahrm.WithHttpClient(&http.Client{
 			Timeout: 30 * time.Second,
 		}),
 	)
@@ -44,12 +44,12 @@ func Example_withCustomHTTPClient() {
 }
 
 func Example_withRequestInterceptor() {
-	client, err := huma.New(
-		&huma.ClientCredentials{
+	client, err := humahrm.New(
+		&humahrm.ClientCredentials{
 			ClientId:     "your-client-id",
 			ClientSecret: "your-client-secret",
 		},
-		huma.WithRequestInterceptor(func(ctx context.Context, req *http.Request) error {
+		humahrm.WithRequestInterceptor(func(ctx context.Context, req *http.Request) error {
 			req.Header.Set("X-Request-ID", "trace-123")
 			return nil
 		}),

@@ -1,4 +1,4 @@
-module github.com/valuetechdev/huma-go
+module github.com/valuetechdev/humahrm-go
 
 go 1.25.5
 

@@ -46,6 +46,9 @@ type Client struct {
 	tokenSource  oauth2.TokenSource
 	interceptors []RequestEditorFn
 	httpClient   *http.Client
+
+	baseURL string
+
 	*ClientWithResponses
 }
 
@@ -81,6 +84,13 @@ func WithToken(token *oauth2.Token) Option {
 	}
 }
 
+// WithCustomBaseURL returns an Option that overrides the default API base URL.
+func WithCustomBaseURL(url string) Option {
+	return func(c *Client) {
+		c.baseURL = url
+	}
+}
+
 // New creates a new [Client] with the given credentials.
 //
 // The client automatically handles OAuth2 authentication using the client
@@ -92,18 +102,22 @@ func WithToken(token *oauth2.Token) Option {
 //   - [WithRequestInterceptor]: Add request interceptors
 //   - [WithToken]: Restore a previously saved token
 func New(creds *ClientCredentials, options ...Option) (*Client, error) {
-	conf := &clientcredentials.Config{
-		ClientID:     creds.ClientId,
-		ClientSecret: creds.ClientSecret,
-		TokenURL:     "https://demo.openapi.humahr.com/auth/oauth/token",
+	client := &Client{
+		httpClient: http.DefaultClient,
+		baseURL:    "https://openapi.humahr.com",
 	}
-
-	baseUrl := "https://demo.openapi.humahr.com/"
-	client := &Client{httpClient: http.DefaultClient}
 
 	for _, option := range options {
 		option(client)
 	}
+	conf := &clientcredentials.Config{
+		ClientID:     creds.ClientId,
+		ClientSecret: creds.ClientSecret,
+		TokenURL:     client.baseURL + "/auth/oauth/token",
+	}
+
+	fmt.Printf("client: %v\n", client)
+	fmt.Printf("conf: %v\n", conf)
 
 	// Inject the custom http.Client into the context so oauth2 uses it as the base transport
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client.httpClient)
@@ -121,7 +135,7 @@ func New(creds *ClientCredentials, options ...Option) (*Client, error) {
 	}
 
 	c, err := NewClientWithResponses(
-		baseUrl,
+		client.baseURL,
 		clientOptions...,
 	)
 	if err != nil {

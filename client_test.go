@@ -15,7 +15,7 @@ func TestClientInitialization(t *testing.T) {
 	c, err := New(&ClientCredentials{
 		ClientId:     os.Getenv("HUMA_CLIENT_ID"),
 		ClientSecret: os.Getenv("HUMA_CLIENT_SECRET"),
-	})
+	}, WithCustomBaseURL("https://demo.openapi.humahr.com"))
 	require.NoError(err)
 
 	// Authentication happens automatically on first request

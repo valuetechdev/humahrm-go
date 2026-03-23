@@ -19,10 +19,13 @@ go get github.com/valuetechdev/huma-go
 import "github.com/valuetechdev/huma-go"
 
 func yourFunc() error {
-	client := huma.New(huma.ClientCredentials{
+	client, err := huma.New(&huma.ClientCredentials{
 		ClientId:     "your-id",
 		ClientSecret: "your-secret",
 	})
+	if err != nil {
+		return fmt.Errorf("failed to init client: %w", err)
+	}
 
 	res, err := client.ListUsersWithResponse(context.Background(), &huma.ListUsersParams{})
 	if err != nil {

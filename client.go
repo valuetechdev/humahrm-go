@@ -9,20 +9,23 @@
 //
 // Create a new client with your credentials:
 //
-//	client := huma.New(&huma.ClientCredentials{
+//	client, err := huma.New(&huma.ClientCredentials{
 //		ClientId:     "your-client-id",
 //		ClientSecret: "your-client-secret",
 //	})
+//	if err != nil {
+//		return err
+//	}
 //
 //	// Make API calls - authentication is handled automatically
-//	resp, err := client.GetEmployeesWithResponse(ctx)
+//	resp, err := client.ListUsersWithResponse(ctx, &huma.ListUsersParams{})
 //
 // # Custom HTTP Client
 //
 // You can provide a custom http.Client for advanced use cases like proxies
 // or custom timeouts:
 //
-//	client := huma.New(creds, huma.WithHttpClient(&http.Client{
+//	client, err := huma.New(creds, huma.WithHttpClient(&http.Client{
 //		Timeout: 30 * time.Second,
 //	}))
 package huma
@@ -88,7 +91,7 @@ func WithToken(token *oauth2.Token) Option {
 //   - [WithHttpClient]: Use a custom http.Client as the base transport
 //   - [WithRequestInterceptor]: Add request interceptors
 //   - [WithToken]: Restore a previously saved token
-func New(creds *ClientCredentials, options ...Option) *Client {
+func New(creds *ClientCredentials, options ...Option) (*Client, error) {
 	conf := &clientcredentials.Config{
 		ClientID:     creds.ClientId,
 		ClientSecret: creds.ClientSecret,
@@ -122,10 +125,10 @@ func New(creds *ClientCredentials, options ...Option) *Client {
 		clientOptions...,
 	)
 	if err != nil {
-		panic(fmt.Errorf("failed to init client: %w", err))
+		return nil, fmt.Errorf("failed to init client: %w", err)
 	}
 	client.ClientWithResponses = c
-	return client
+	return client, nil
 }
 
 // Token returns the current OAuth2 token, fetching a new one if necessary.

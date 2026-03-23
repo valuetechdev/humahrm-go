@@ -12,10 +12,11 @@ import (
 func TestClientInitialization(t *testing.T) {
 	require := require.New(t)
 
-	c := New(&ClientCredentials{
+	c, err := New(&ClientCredentials{
 		ClientId:     os.Getenv("HUMA_CLIENT_ID"),
 		ClientSecret: os.Getenv("HUMA_CLIENT_SECRET"),
 	})
+	require.NoError(err)
 
 	// Authentication happens automatically on first request
 	res, err := c.ListUsersWithResponse(context.Background(), &ListUsersParams{})

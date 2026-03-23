@@ -2,8 +2,24 @@
 version = "2"
 
 [linters]
-enable = ["bodyclose", "gosec", "nilnil", "sloglint","unused","unconvert","whitespace","misspell"]
+enable = ["bodyclose", "gosec", "nilnil", "sloglint","unused","unconvert","whitespace","misspell", "godoclint"]
+
+[linters.settings.godoclint]
+enable = ["require-doc", "deprecated", "no-unused-link", "require-pkg-doc"]
+disable = ["single-pkg-doc"]
+
+[linters.exclusions]
+generated = "strict"
 
 [[linters.exclusions.rules]]
 linters = [ "errcheck" ]
 source = "^\\s*defer\\s+"
+
+[[linters.exclusions.rules]]
+path = ".*_test\\.go$"
+linters = ["godoclint", "errcheck"]
+
+[[linters.exclusions.rules]]
+path = ".*\\.gen\\.go$"
+linters = ["godoclint"]
+

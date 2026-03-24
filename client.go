@@ -32,6 +32,7 @@ package humahrm
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -102,6 +103,16 @@ func WithCustomBaseURL(url string) Option {
 //   - [WithRequestInterceptor]: Add request interceptors
 //   - [WithToken]: Restore a previously saved token
 func New(creds *ClientCredentials, options ...Option) (*Client, error) {
+	if creds == nil {
+		return nil, errors.New("credentials must not be nil")
+	}
+	if creds.ClientId == "" {
+		return nil, errors.New("client id must not be empty")
+	}
+	if creds.ClientSecret == "" {
+		return nil, errors.New("client secret must not be empty")
+	}
+
 	client := &Client{
 		httpClient: http.DefaultClient,
 		baseURL:    "https://openapi.humahr.com",

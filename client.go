@@ -116,9 +116,6 @@ func New(creds *ClientCredentials, options ...Option) (*Client, error) {
 		TokenURL:     client.baseURL + "/auth/oauth/token",
 	}
 
-	fmt.Printf("client: %v\n", client)
-	fmt.Printf("conf: %v\n", conf)
-
 	// Inject the custom http.Client into the context so oauth2 uses it as the base transport
 	ctx := context.WithValue(context.Background(), oauth2.HTTPClient, client.httpClient)
 	tokenSource := conf.TokenSource(ctx)

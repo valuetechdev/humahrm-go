@@ -1,0 +1,14 @@
+# :schema https://git.sr.ht/~timharek/git-bump/blob/main/schema.json
+[versioning]
+convention = 'calver'
+prefix = 'v'
+format = 'YYYY.MM.MICRO'
+timezone = 'UTC'
+
+[git]
+remote = 'origin'
+auto_push = false
+
+[messages]
+use_shortlog = false
+custom_messages = []

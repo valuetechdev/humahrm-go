@@ -6,6 +6,7 @@ golangci-lint = "latest"
 hk = "latest"
 jq = "latest"
 yq = "latest"
+pkl = "latest"
 
 [tasks.api]
 description = "Download latest API specification"

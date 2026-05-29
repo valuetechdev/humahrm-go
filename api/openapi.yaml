@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Huma API
-  version: 1.53.2
+  version: 1.58.0
 servers:
   - url: https://openapi.humahr.com
     description: Generated server url
@@ -446,6 +446,13 @@ paths:
             maxItems: 25
             minItems: 0
             uniqueItems: true
+        - name: email
+          in: query
+          description: Filter users whose email starts with this value (case-insensitive).
+          required: false
+          schema:
+            type: string
+            description: Filter users whose email starts with this value (case-insensitive).
       responses:
         "200":
           description: Successful Response
@@ -1950,6 +1957,7 @@ paths:
                 $ref: '#/components/schemas/StandardServerErrorResponse'
       security:
         - authentication: []
+  /users/hubspot-visitor-token: {}
   /job-titles/paged: {}
   /holidays/{countryCode}:
     get:
@@ -2118,16 +2126,16 @@ components:
         contentLength:
           type: integer
           format: int64
+        chunked:
+          type: boolean
+        repeatable:
+          type: boolean
+        streaming:
+          type: boolean
         contentType:
           $ref: '#/components/schemas/Header'
         contentEncoding:
           $ref: '#/components/schemas/Header'
-        streaming:
-          type: boolean
-        repeatable:
-          type: boolean
-        chunked:
-          type: boolean
     HttpParams: {}
     HttpResponse:
       type: object
@@ -2145,6 +2153,9 @@ components:
         reasonPhrase:
           type: string
           writeOnly: true
+        header:
+          $ref: '#/components/schemas/Header'
+          writeOnly: true
         headers:
           type: array
           items:
@@ -2153,9 +2164,6 @@ components:
         params:
           $ref: '#/components/schemas/HttpParams'
           deprecated: true
-        header:
-          $ref: '#/components/schemas/Header'
-          writeOnly: true
         protocolVersion:
           $ref: '#/components/schemas/ProtocolVersion'
         allHeaders:

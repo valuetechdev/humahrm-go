@@ -11,16 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
-
-      - name: Vet
-        run: go vet ./...
-
-      - name: Lint
-        run: go tool -modfile=go.tool.mod golangci-lint run ./...
-
-      - name: Build
-        run: go build ./...
+          fetch-depth: 0
+      - uses: jdx/mise-action@v4
+        with:
+          install: true
+          cache: true
+      - name: Run mise check
+        run: mise check --all

@@ -1,0 +1,21 @@
+[tools]
+actionlint = "latest"
+go = "latest"
+"go:git.sr.ht/~timharek/git-bump/cmd/git-bump" = "latest"
+golangci-lint = "latest"
+hk = "latest"
+jq = "latest"
+yq = "latest"
+
+[tasks.api]
+description = "Download latest API specification"
+run = "curl https://openapi.humahr.com/v3/api-docs | jq . | yq -Poy > ./api/openapi.yaml"
+
+[tasks.check]
+description = "Static checks"
+run = "hk check"
+
+[tasks.bump]
+confirm = { message = "Are you sure you want to bump version?", default = "no" }
+description = "Bump version"
+run = "git-bump"
